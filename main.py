@@ -37,9 +37,9 @@ def gerar():
     except:
         nValido = True
     if  operacao == '':
-        texto2['text'] = 'Selecione a operação'
+        legenda['text'] = 'Selecione a operação'
     elif nValido:
-        texto1['text'] = 'Digite o numero valido'
+        legenda['text'] = 'Digite o numero valido'
     else:
         n = 1
         tabuada = ""
@@ -63,7 +63,8 @@ def gerar():
                     else:
                         n += numero
                 resultado = n / numero
-            tabuada += f"{numero}{operacao}{n}={resultado}\n"
+                resultado = int(resultado)
+            tabuada += f"{n} {operacao} {numero} = {resultado}\n"
             resultado = ""
             if operacao not in ["/"]:
                 n +=1
@@ -73,25 +74,31 @@ def gerar():
 
 
 janela = Tk()
+janela.minsize(270, 240)
 janela.title('Tabuada')
-texto1 = Label(janela, text='Digite o valor para gerar a tabela')
-texto1.grid(column=0, row=0)
-numerotxt = Entry(janela, width=10)
-numerotxt.grid(column=0, row=1)
-texto2 = Label(janela, text='Selecione a operação para gerar a tabela')
-texto2.grid(column=0, row=2)
-botaoMais = Button(janela, text='+', command=mais, bg='white')
-botaoMais.grid(column=0, row=3)
-botaoMenos = Button(janela, text='-', command=menos, bg='white')
-botaoMenos.grid(column=0, row=4)
-botaoVezes = Button(janela, text='x', command=vezes, bg='white')
-botaoVezes.grid(column=0, row=5)
-botaoDividir = Button(janela, text='/', command=dividir, bg='white')
-botaoDividir.grid(column=0, row=6)
-botaoGerar = Button(janela, text='=', command=gerar, bg='white')
-botaoGerar.grid(column=0, row=7)
+#Linha 0 Titulo
+legenda = Label(janela, text='TABUADA', width=40, bg='#4682B4')
+legenda.grid(column=0, row=0, columnspan=4)
+#Linha 1 valor
+txtovalor = Label(janela, text='VALOR', width=10)
+txtovalor.grid(column=0, row=1, columnspan=1)
+numerotxt = Entry(janela, width=12)
+numerotxt.grid(column=1, row=1)
+#Linha 2 botoes
+botaoMais = Button(janela, text='+', command=mais, bg='white', width=10, height=3)
+botaoMais.grid(column=0, row=2)
+botaoMenos = Button(janela, text='-', command=menos, bg='white', width=10, height=3)
+botaoMenos.grid(column=1, row=2)
+#Linha 3 botoes
+botaoVezes = Button(janela, text='x', command=vezes, bg='white', width=10, height=3)
+botaoVezes.grid(column=0, row=3)
+botaoDividir = Button(janela, text='/', command=dividir, bg='white', width=10, height=3)
+botaoDividir.grid(column=1, row=3)
+#Linha 4 gerar
+botaoGerar = Button(janela, text='=', command=gerar, bg='white', width=22, height=3)
+botaoGerar.grid(column=0, row=4, columnspan=2)
 auxiliar = Label()
-Resultado = Label(janela)
-Resultado.grid(column=1, row=0, rowspan=10)
+Resultado = Label(janela, bd=10, height=10, font=10, bg='#4169E1', width=10)
+Resultado.grid(column=3, row=1, rowspan=4)
        
 janela.mainloop()
